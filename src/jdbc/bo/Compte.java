@@ -30,4 +30,13 @@ public class Compte {
     }
 
 
+    public float versement(float montant){
+
+        return montant;
+    }
+
+    public float retrait(float montant){
+        return montant;
+    }
+
 }
