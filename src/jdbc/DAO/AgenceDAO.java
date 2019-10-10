@@ -1,4 +1,4 @@
-package DAO;
+package jdbc.DAO;
 
 import bo.Agence;
 

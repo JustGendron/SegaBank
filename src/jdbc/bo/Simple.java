@@ -1,4 +1,4 @@
-package bo;
+package jdbc.bo;
 
 public class Simple extends Compte {
 

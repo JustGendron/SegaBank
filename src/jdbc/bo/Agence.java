@@ -1,4 +1,4 @@
-package bo;
+package jdbc.bo;
 
 public class Agence {
     private int identifiant;

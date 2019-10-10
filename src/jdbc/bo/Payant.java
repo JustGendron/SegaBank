@@ -1,4 +1,4 @@
-package bo;
+package jdbc.bo;
 
 public class Payant extends Compte {
 
