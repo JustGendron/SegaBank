@@ -5,8 +5,7 @@ public class Epargne extends Compte {
     private int tauxInteret;
 
 
-    public Epargne(int identifiant, float solde, int tauxInteret) {
-        super(identifiant, solde);
+    public Epargne(int tauxInteret) {
         this.tauxInteret = tauxInteret;
     }
 

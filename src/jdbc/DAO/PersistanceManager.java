@@ -20,8 +20,9 @@ public class PersistanceManager {
         if (connection == null || !connection.isValid(2)) {
 
             Properties props = new Properties();
-            try (FileInputStream fis = new FileInputStream(PROPS_FILE)) {
-                props.load(fis);
+
+            try ( FileInputStream fis = new FileInputStream( PROPS_FILE ) ) {
+                props.load( fis );
             }
 
             String driverClass = props.getProperty("jdbc.class.driver");
@@ -29,8 +30,7 @@ public class PersistanceManager {
             String dbLogin = props.getProperty("jdbc.db.login");
             String dbPWD = props.getProperty("jdbc.db.pwd");
 
-            Class.forName( driverClass );
-            connection = DriverManager.getConnection( dbURL, dbLogin, dbPWD );
+            connection = DriverManager.getConnection(dbURL, dbLogin, dbPWD );
         }
         return connection;
     }

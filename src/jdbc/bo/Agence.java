@@ -5,6 +5,11 @@ public class Agence {
     private int code;
     private String adresse;
 
+
+    public Agence() {
+
+    }
+
     public Agence(int code, String adresse) {
         this.code = code;
         this.adresse = adresse;

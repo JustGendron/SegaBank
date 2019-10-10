@@ -2,23 +2,39 @@ package jdbc.bo;
 
 public class Compte {
 
-    private int identifiant;
+    private int code;
+    private int id;
     private float solde;
+    private int idagence;
 
     public Compte() {
+
     }
 
-    public Compte(int identifiant, float solde) {
-        this.identifiant = identifiant;
+    public Compte(int id) {
+        this.id = id;
+    }
+
+    public Compte(int code, float solde, int idagence) {
+        this.code = code;
         this.solde = solde;
+        this.idagence = idagence;
     }
 
-    public int getIdentifiant() {
-        return identifiant;
+    public int getId() {
+        return id;
     }
 
-    public void setIdentifiant(int identifiant) {
-        this.identifiant = identifiant;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public float getSolde() {
@@ -29,6 +45,13 @@ public class Compte {
         this.solde = solde;
     }
 
+    public int getIdagence() {
+        return idagence;
+    }
+
+    public void setIdagence(int idagence) {
+        this.idagence = idagence;
+    }
 
     public float versement(float montant){
 
@@ -39,4 +62,13 @@ public class Compte {
         return montant;
     }
 
+    @Override
+    public String toString() {
+        return "Compte{" +
+                "code=" + code +
+                ", id=" + id +
+                ", solde=" + solde +
+                ", idagence=" + idagence +
+                ' ';
+    }
 }

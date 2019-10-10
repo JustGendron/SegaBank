@@ -2,8 +2,7 @@ package jdbc.bo;
 
 public class Payant extends Compte {
 
-    public Payant(int identifiant, float solde) {
-        super(identifiant, solde);
+    public Payant() {
     }
 
     @Override
