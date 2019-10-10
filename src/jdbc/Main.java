@@ -1,4 +1,4 @@
-import DAO.AgenceDAO;
+import jdbc.DAO.AgenceDAO;
 import DAO.IDAO;
 import bo.Agence;
 
