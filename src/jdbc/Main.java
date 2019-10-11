@@ -1,9 +1,6 @@
 package jdbc;
 
-import jdbc.DAO.AgenceDAO;
-import jdbc.DAO.CompteDAO;
-import jdbc.DAO.IDAO;
-import jdbc.DAO.SimpleDAO;
+import jdbc.DAO.*;
 import jdbc.bo.Agence;
 import jdbc.bo.Compte;
 import jdbc.bo.Payant;
@@ -19,6 +16,8 @@ public class Main {
     private static IDAO<Integer, Integer, Compte> daoC = new CompteDAO();
     private static IDAO<Integer, Integer, Agence> daoA = new AgenceDAO();
     private static IDAO<Integer, Integer, Simple> daoS = new SimpleDAO();
+   // private static IDAO<Integer, Integer, Epargne> daoE = new EpargneDAO();
+    private static IDAO<Integer, Integer, Payant> daoP = new PayantDAO();
 
     private static Scanner sc = new Scanner( System.in );
 
@@ -138,39 +137,89 @@ public class Main {
                 // D'abord on va créer le compte puis le push sur la BDD
                 // Puis créer Simple/Epargne/Payant
 
-
                 Compte compteS = new Compte();
+
                 System.out.print( "Entrez le code : " );
-                String codeCompte = sc.nextLine();
-                compteS.setCode(Integer.parseInt(codeCompte));
+                String codeCompteS = sc.nextLine();
+                compteS.setCode(Integer.parseInt(codeCompteS));
+
                 System.out.print( "Entrez solde : ");
                 compteS.setSolde(Float.parseFloat(sc.nextLine()));
+
                 System.out.print( "Entrez idAgence : ");
                 compteS.setIdagence(Integer.parseInt(sc.nextLine()));
+
                 daoC.create(compteS); // Push vers BDD
 
                 System.out.print("Entrez le découvert : ");
                 String decouvert = sc.nextLine();
-                Simple simple = new Simple(daoC.findidbycode(Integer.parseInt(codeCompte)).getId(), Float.parseFloat(decouvert));
+                Simple simple = new Simple(daoC.findidbycode(Integer.parseInt(codeCompteS)).getId(), Float.parseFloat(decouvert));
+
                 daoS.create(simple);
 
                 System.out.println( "Compte Simple créé avec succès!" );
                 System.out.println( " " );
+
                 bankMainMenu();
                 break;
+
             case 2:
                 Compte compteE = new Compte();
+
+                System.out.print( "Entrez le code : " );
+                String codeCompteE = sc.nextLine();
+                compteE.setCode(Integer.parseInt(codeCompteE));
+
+                System.out.print( "Entrez solde : ");
+                compteE.setSolde(Float.parseFloat(sc.nextLine()));
+
+                System.out.print( "Entrez idAgence : ");
+                compteE.setIdagence(Integer.parseInt(sc.nextLine()));
+
+                daoC.create(compteE); // Push vers BDD
+
+                // Reste à faire le compte epargne
+
+
                 break;
+
             case 3:
                 Compte compteP = new Compte();
 
+                System.out.print( "Entrez le code : " );
+                String codeCompteP = sc.nextLine();
+                compteP.setCode(Integer.parseInt(codeCompteP));
 
-                Payant payant = new Payant();
+                System.out.print( "Entrez solde : ");
+                compteP.setSolde(Float.parseFloat(sc.nextLine()));
+
+                System.out.print( "Entrez idAgence : ");
+                compteP.setIdagence(Integer.parseInt(sc.nextLine()));
+
+                daoC.create(compteP); // Push vers BDD
+                Payant payant = new Payant(daoC.findidbycode(Integer.parseInt(codeCompteP)).getId());
+                daoP.create(payant);
+
+
+                System.out.println( "Compte Payant créé avec succès!" );
+                System.out.println( " " );
+
+                bankMainMenu();
                 break;
         }
     }
 
-    private static void ajouterAgence() {
+    private static void ajouterAgence() throws SQLException, IOException, ClassNotFoundException {
+        Agence agence = new Agence();
+
+        System.out.println("Entrez code de l'agence : ");
+        agence.setCode(Integer.parseInt(sc.nextLine()));
+
+        System.out.println("Entrez adresse de l'agence");
+        agence.setAdresse(sc.nextLine());
+
+        daoA.create(agence);
+
     }
 
     private static void listerComptes() throws SQLException, IOException, ClassNotFoundException {
