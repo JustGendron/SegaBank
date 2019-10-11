@@ -27,6 +27,11 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
         }
     }
 
+    @Override
+    public Simple findidbycode(Integer integer) throws SQLException, IOException, ClassNotFoundException {
+        return null;
+    }
+
  /*   @Override
     public Simple findidbycode(Integer aLong) throws SQLException, IOException, ClassNotFoundException {
         return null;

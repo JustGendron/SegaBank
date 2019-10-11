@@ -6,7 +6,7 @@ public class Simple extends Compte {
     private int id;
 
     public Simple() {
-        super();
+
     }
 
     public Simple( float solde, int idagence, float decouvert) {
@@ -47,7 +47,8 @@ public class Simple extends Compte {
     @Override
     public String toString() {
         return super.toString()+
-                "decouvert=" + decouvert + '}';
+                "decouvert=" + decouvert + '}'+
+                id+"";
     }
 }
 

@@ -33,7 +33,7 @@ public class CompteDAO implements IDAO<Integer, Integer,Compte> {
         }
     }
 
-  /*  @Override
+    @Override
     public Compte findidbycode(Integer code ) throws SQLException, IOException, ClassNotFoundException {
         Compte compte = null;
         Connection connection = PersistanceManager.getConnection();
@@ -50,7 +50,7 @@ public class CompteDAO implements IDAO<Integer, Integer,Compte> {
             }
         }
         return compte;
-    }*/
+    }
 
     @Override
     public List<Compte> findAll() throws SQLException, IOException, ClassNotFoundException {

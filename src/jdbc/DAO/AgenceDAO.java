@@ -2,6 +2,9 @@ package jdbc.DAO;
 
 import jdbc.bo.Agence;
 
+
+import jdbc.bo.Agence;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,6 +27,11 @@ public class AgenceDAO implements IDAO<Integer, Integer, Agence> {
 
             }
         }
+    }
+
+    @Override
+    public Agence findidbycode(Integer integer) throws SQLException, IOException, ClassNotFoundException {
+        return null;
     }
 
     /*@Override
