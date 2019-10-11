@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 10 oct. 2019 à 10:43
+-- Généré le :  ven. 11 oct. 2019 à 08:12
 -- Version du serveur :  10.4.6-MariaDB
 -- Version de PHP :  7.3.9
 
@@ -50,8 +50,16 @@ INSERT INTO `agence` (`id`, `code`, `adresse`) VALUES
 CREATE TABLE `compte` (
   `id` int(11) NOT NULL,
   `solde` float NOT NULL,
-  `idagence` int(11) NOT NULL
+  `idagence` int(11) NOT NULL,
+  `code` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `compte`
+--
+
+INSERT INTO `compte` (`id`, `solde`, `idagence`, `code`) VALUES
+(22, 200, 1, 67);
 
 -- --------------------------------------------------------
 
@@ -71,8 +79,15 @@ CREATE TABLE `payant` (
 
 CREATE TABLE `simple` (
   `id` int(11) NOT NULL,
-  `decouvert` float NOT NULL
+  `decouvert` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `simple`
+--
+
+INSERT INTO `simple` (`id`, `decouvert`) VALUES
+(22, 50);
 
 --
 -- Index pour les tables déchargées
@@ -89,7 +104,8 @@ ALTER TABLE `agence`
 --
 ALTER TABLE `compte`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_idagence` (`idagence`);
+  ADD UNIQUE KEY `code` (`code`),
+  ADD KEY `FK_agence` (`idagence`);
 
 --
 -- Index pour la table `payant`
@@ -101,7 +117,7 @@ ALTER TABLE `payant`
 -- Index pour la table `simple`
 --
 ALTER TABLE `simple`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `FK_s` (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -117,7 +133,7 @@ ALTER TABLE `agence`
 -- AUTO_INCREMENT pour la table `compte`
 --
 ALTER TABLE `compte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Contraintes pour les tables déchargées
@@ -127,6 +143,7 @@ ALTER TABLE `compte`
 -- Contraintes pour la table `compte`
 --
 ALTER TABLE `compte`
+  ADD CONSTRAINT `FK_agence` FOREIGN KEY (`idagence`) REFERENCES `agence` (`id`),
   ADD CONSTRAINT `FK_idagence` FOREIGN KEY (`idagence`) REFERENCES `agence` (`id`);
 
 --
@@ -139,7 +156,7 @@ ALTER TABLE `payant`
 -- Contraintes pour la table `simple`
 --
 ALTER TABLE `simple`
-  ADD CONSTRAINT `simple_ibfk_1` FOREIGN KEY (`id`) REFERENCES `compte` (`id`);
+  ADD CONSTRAINT `FK_s` FOREIGN KEY (`id`) REFERENCES `compte` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
