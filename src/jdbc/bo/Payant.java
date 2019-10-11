@@ -1,8 +1,18 @@
 package jdbc.bo;
 
 public class Payant extends Compte {
+    private int id;
 
     public Payant() {
+    }
+
+    public Payant(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override

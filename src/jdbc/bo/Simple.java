@@ -9,8 +9,8 @@ public class Simple extends Compte {
         super();
     }
 
-    public Simple(int code, float solde, int idagence, float decouvert) {
-        super(code, solde, idagence);
+    public Simple( float solde, int idagence, float decouvert) {
+        super(solde, idagence);
         this.decouvert = decouvert;
     }
 
@@ -35,7 +35,13 @@ public class Simple extends Compte {
 
     @Override
     public float retrait(float montant) {
-        return super.retrait(montant);
+        float resp = this.getSolde();
+        if (this.getSolde()-montant >= this.getDecouvert()){
+            this.setSolde(this.getSolde()-montant);
+             resp = this.getSolde();
+        }
+        return resp;
+
     }
 
     @Override

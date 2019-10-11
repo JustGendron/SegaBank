@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgenceDAO implements IDAO<Integer, Agence> {
+public class AgenceDAO implements IDAO<Integer, Integer, Agence> {
     private static final String INSERT_QUERY = "INSERT INTO agence (code, adresse) VALUES(?,?)";
     private static final String FIND_ALL_QUERY = "SELECT * FROM agence";
 
@@ -26,10 +26,10 @@ public class AgenceDAO implements IDAO<Integer, Agence> {
         }
     }
 
-    @Override
+    /*@Override
     public Agence findidbycode(Integer aLong) throws SQLException, IOException, ClassNotFoundException {
         return null;
-    }
+    }*/
 
     @Override
     public List<Agence> findAll() throws SQLException, IOException, ClassNotFoundException {
@@ -52,7 +52,12 @@ public class AgenceDAO implements IDAO<Integer, Agence> {
     }
 
     @Override
-    public List<Agence> findAllS() throws SQLException, IOException, ClassNotFoundException {
+    public Agence findById(Integer integer) throws SQLException, IOException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public List<Agence> findByIdList(Integer integer) throws SQLException, IOException, ClassNotFoundException {
         return null;
     }
 
