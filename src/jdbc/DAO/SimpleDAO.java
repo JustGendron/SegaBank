@@ -46,6 +46,7 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
                 try ( ResultSet rs = ps.executeQuery() ) {
                     while ( rs.next() ) {
                         Simple simple = new Simple();
+                        simple.setCode( rs.getInt("code"));
                         simple.setSolde( rs.getFloat( "solde" ) );
                         simple.setDecouvert( rs.getInt( "decouvert" ) );
                         simple.setIdagence( rs.getInt( "idagence" ) );

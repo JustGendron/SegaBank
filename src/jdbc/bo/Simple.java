@@ -32,6 +32,10 @@ public class Simple extends Compte {
         this.decouvert = decouvert;
     }
 
+    @Override
+    public int getCode() {
+        return super.getCode();
+    }
 
     @Override
     public float retrait(float montant) {

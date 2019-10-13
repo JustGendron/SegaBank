@@ -16,6 +16,11 @@ public class Payant extends Compte {
     }
 
     @Override
+    public void setCode(int code) {
+        super.setCode(code);
+    }
+
+    @Override
     public float versement(float montant) {
         return super.versement(montant);
     }

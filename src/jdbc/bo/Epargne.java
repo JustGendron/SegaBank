@@ -2,18 +2,25 @@ package jdbc.bo;
 
 public class Epargne extends Compte {
 
-    private int tauxInteret;
+    private float tauxInteret;
 
+    public Epargne() {
+    }
 
-    public Epargne(int tauxInteret) {
+    public Epargne(float tauxInteret) {
         this.tauxInteret = tauxInteret;
     }
 
-    public int getTauxInteret() {
+    public Epargne(int id, float tauxInteret) {
+        super(id);
+        this.tauxInteret = tauxInteret;
+    }
+
+    public float getTauxInteret() {
         return tauxInteret;
     }
 
-    public void setTauxInteret(int tauxInteret) {
+    public void setTauxInteret(float tauxInteret) {
         this.tauxInteret = tauxInteret;
     }
 

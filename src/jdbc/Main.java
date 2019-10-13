@@ -1,10 +1,7 @@
 package jdbc;
 
 import jdbc.DAO.*;
-import jdbc.bo.Agence;
-import jdbc.bo.Compte;
-import jdbc.bo.Payant;
-import jdbc.bo.Simple;
+import jdbc.bo.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,7 +13,7 @@ public class Main {
     private static IDAO<Integer, Integer, Compte> daoC = new CompteDAO();
     private static IDAO<Integer, Integer, Agence> daoA = new AgenceDAO();
     private static IDAO<Integer, Integer, Simple> daoS = new SimpleDAO();
-   // private static IDAO<Integer, Integer, Epargne> daoE = new EpargneDAO();
+    private static IDAO<Integer, Integer, Epargne> daoE = new EpargneDAO();
     private static IDAO<Integer, Integer, Payant> daoP = new PayantDAO();
 
     private static Scanner sc = new Scanner( System.in );
@@ -176,7 +173,17 @@ public class Main {
                 System.out.print( "Entrez idAgence : ");
                 compteE.setIdagence(Integer.parseInt(sc.nextLine()));
 
+
                 daoC.create(compteE); // Push vers BDD
+
+                System.out.print("Entrez le taux d'interet : ");
+                String tauxint = sc.nextLine();
+                Epargne epargne = new Epargne(daoC.findidbycode(Integer.parseInt(codeCompteE)).getId(), Float.parseFloat(tauxint));
+
+                daoE.create(epargne);
+
+                System.out.println( "Compte Epargne créé avec succès!" );
+                System.out.println( " " );
 
                 // Reste à faire le compte epargne
 
@@ -224,12 +231,26 @@ public class Main {
 
     private static void listerComptes() throws SQLException, IOException, ClassNotFoundException {
 
-        for (int i = 0; i < (daoC.findAll()).size(); i++){
+        for (int i = 0; i < (daoS.findAll()).size(); i++){
             System.out.print(i+1 + " - Compte : ");
-            System.out.print(daoC.findAll().get(i).getCode());
+            System.out.print(daoS.findAll().get(i).getCode());
             System.out.print(" - ");
-            System.out.println(daoC.findAll().get(i).getSolde());
+            System.out.println(daoS.findAll().get(i).getSolde());
+            System.out.print(" - ");
+            System.out.println(daoS.findAll().get(i).getDecouvert());
+            System.out.print(" - ");
+            System.out.println(daoS.findAll().get(i).getIdagence());
         }
+        for (int i = 0; i < (daoP.findAll()).size(); i++){
+            System.out.print(i+1 + " - Compte : ");
+            System.out.print(daoP.findAll().get(i).getCode());
+            System.out.print(" - ");
+            System.out.println(daoP.findAll().get(i).getSolde());
+            System.out.print(" - ");
+            System.out.println(daoP.findAll().get(i).getIdagence());
+        }
+
+
         bankMainMenu();
 
     }

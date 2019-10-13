@@ -2,6 +2,7 @@ package jdbc.DAO;
 
 import jdbc.bo.Agence;
 import jdbc.bo.Compte;
+import jdbc.bo.Simple;
 
 import java.io.IOException;
 import java.sql.*;
@@ -14,6 +15,9 @@ public class CompteDAO implements IDAO<Integer, Integer,Compte> {
     private static final String FIND_QUERY = "SELECT * FROM compte  WHERE code = ?";
     private static final String FIND_QUERY_ID = "SELECT * FROM compte WHERE id = ?";
     private static final String FIND_ALL_QUERY = "SELECT * FROM compte,simple,payant where idagence = ?";
+    private static final String FIND_ALLSIMPLE_QUERY = "SELECT * FROM compte,simple where compte.id = simple.id";
+    private static final String FIND_ALLPAYANT_QUERY = "SELECT * FROM compte,payant where compte.id = payant.id";
+    private static final String FIND_ALLEpargne_QUERY = "SELECT * FROM compte,simple where compte.id = simple.id";
 
 
 
@@ -54,7 +58,24 @@ public class CompteDAO implements IDAO<Integer, Integer,Compte> {
 
     @Override
     public List<Compte> findAll() throws SQLException, IOException, ClassNotFoundException {
-        return null;
+        List<Compte> listS = new ArrayList<>();
+        Connection connection = PersistanceManager.getConnection();
+        if ( connection != null ) {
+            try ( PreparedStatement ps = connection.prepareStatement( FIND_ALLSIMPLE_QUERY ) ) {
+                try ( ResultSet rs = ps.executeQuery() ) {
+                    while ( rs.next() ) {
+                        Simple compte = new Simple();
+                        compte.setSolde( rs.getFloat( "solde" ) );
+                        compte.setCode( rs.getInt( "code" ) );
+                        compte.setIdagence( rs.getInt( "idagence" ) );
+                        compte.setDecouvert( rs.getInt( "decouvert" ) );
+
+                        listS.add( compte );
+                    }
+                }
+            }
+        }
+        return listS;
     }
 
     @Override
