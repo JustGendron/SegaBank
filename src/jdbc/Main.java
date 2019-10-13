@@ -20,6 +20,29 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
 
+
+        Simple simple = new Simple(50,2,0);
+        Payant payant = new Payant(100,1);
+
+        simple.versement(20);
+        System.out.println(simple.getSolde());
+        simple.retrait(20);
+        System.out.println(simple.getSolde());
+        simple.retrait(50);
+        System.out.println(simple.getSolde());
+        simple.retrait(20);
+        System.out.println(simple.getSolde());
+
+        payant.versement(100);
+        System.out.println(payant.getSolde());
+        payant.retrait(100);
+        System.out.println(payant.getSolde());
+
+
+
+
+
+
             bankMainMenu(); // lancement menu
 
         /*IDAO<Agence> dao = new AgenceDAO();

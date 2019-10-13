@@ -54,12 +54,15 @@ public class Compte {
     }
 
     public float versement(float montant){
+        this.setSolde( montant+this.getSolde());
 
-        return montant;
+        return this.getSolde();
+
     }
 
     public float retrait(float montant){
-        return montant;
+        this.setSolde(this.getSolde()-montant);
+        return this.getSolde();
     }
 
     @Override

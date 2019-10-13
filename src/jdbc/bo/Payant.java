@@ -6,6 +6,10 @@ public class Payant extends Compte {
     public Payant() {
     }
 
+    public Payant(float solde, int idagence) {
+        super(solde, idagence);
+    }
+
     public Payant(int id) {
         this.id = id;
     }
@@ -22,11 +26,15 @@ public class Payant extends Compte {
 
     @Override
     public float versement(float montant) {
-        return super.versement(montant);
+        float taxe = (float) (montant*0.05);
+        super.setSolde(super.getSolde()+montant-taxe);
+        return super.getSolde();
     }
 
     @Override
     public float retrait(float montant) {
-        return super.retrait(montant);
+        float taxe = (float) (montant*0.05);
+        super.setSolde(super.getSolde()-montant-taxe);
+        return super.getSolde();
     }
 }
