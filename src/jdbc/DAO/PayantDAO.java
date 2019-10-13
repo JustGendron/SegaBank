@@ -28,6 +28,11 @@ public class PayantDAO implements IDAO<Integer, Integer, Payant>{
 
     }
 
+    @Override
+    public Payant findidbycode(Integer integer) throws SQLException, IOException, ClassNotFoundException {
+        return null;
+    }
+
 /*    @Override
     public Payant findidbycode(Integer integer) throws SQLException, IOException, ClassNotFoundException {
         return null;

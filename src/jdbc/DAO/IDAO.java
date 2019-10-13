@@ -8,7 +8,7 @@ public interface IDAO<ID, CODE, E> {
 
         void create( E object ) throws SQLException, IOException, ClassNotFoundException;
 
-       // E findidbycode(CODE code ) throws SQLException, IOException, ClassNotFoundException;
+        E findidbycode(CODE code ) throws SQLException, IOException, ClassNotFoundException;
 
         List<E> findAll() throws SQLException, IOException, ClassNotFoundException;
 

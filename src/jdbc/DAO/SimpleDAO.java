@@ -10,7 +10,7 @@ import java.util.List;
 public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
     private static final String INSERT_QUERY = "INSERT INTO simple (id,decouvert) VALUES(?,?)";
     private static final String FIND_ALL_SIMPLE = "SELECT * FROM compte,simple  WHERE compte.id = simple.id";
-    private static final String FIND_QUERY_ID = "SELECT * FROM simple WHERE id = ?";
+    private static final String FIND_QUERY_ID = "SELECT * FROM compte,simple  WHERE compte.id = simple.id and compte.idagence = ?";
 
 
     @Override
@@ -27,6 +27,11 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
         }
     }
 
+    @Override
+    public Simple findidbycode(Integer integer) throws SQLException, IOException, ClassNotFoundException {
+        return null;
+    }
+
  /*   @Override
     public Simple findidbycode(Integer aLong) throws SQLException, IOException, ClassNotFoundException {
         return null;
@@ -41,6 +46,7 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
                 try ( ResultSet rs = ps.executeQuery() ) {
                     while ( rs.next() ) {
                         Simple simple = new Simple();
+                        simple.setSolde( rs.getFloat( "solde" ) );
                         simple.setDecouvert( rs.getInt( "decouvert" ) );
                         simple.setIdagence( rs.getInt( "idagence" ) );
 
@@ -51,6 +57,28 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
         }
         return list;
 
+    }
+
+    @Override
+    public List<Simple> findByIdList(Integer id) throws SQLException, IOException, ClassNotFoundException {
+        List<Simple> list = new ArrayList<>();
+        Connection connection = PersistanceManager.getConnection();
+        if ( connection != null ) {
+            try ( PreparedStatement ps = connection.prepareStatement( FIND_QUERY_ID ) ) {
+                ps.setLong(1, id);
+                try ( ResultSet rs = ps.executeQuery() ) {
+                    while ( rs.next() ) {
+                        Simple simple = new Simple();
+                        simple.setSolde( rs.getFloat( "solde" ) );
+                        simple.setDecouvert( rs.getInt( "decouvert" ) );
+                        simple.setIdagence( rs.getInt( "idagence" ) );
+
+                        list.add( simple );
+                    }
+                }
+            }
+        }
+        return list;
     }
 
     @Override
@@ -71,10 +99,5 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
             }
         }
         return simple;
-    }
-
-    @Override
-    public List<Simple> findByIdList(Integer integer) throws SQLException, IOException, ClassNotFoundException {
-        return null;
     }
 }

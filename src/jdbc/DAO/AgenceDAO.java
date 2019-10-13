@@ -26,6 +26,11 @@ public class AgenceDAO implements IDAO<Integer, Integer, Agence> {
         }
     }
 
+    @Override
+    public Agence findidbycode(Integer integer) throws SQLException, IOException, ClassNotFoundException {
+        return null;
+    }
+
     /*@Override
     public Agence findidbycode(Integer aLong) throws SQLException, IOException, ClassNotFoundException {
         return null;
