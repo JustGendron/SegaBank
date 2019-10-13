@@ -21,8 +21,9 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
 
 
+        //System.out.println(daoC.findByCode(1));
+        daoC.remove(daoC.findByCode(1));
 
-        System.out.println(daoS.findByCode(67));
 
         bankMainMenu(); // lancement menu
 
