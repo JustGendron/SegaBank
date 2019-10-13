@@ -127,4 +127,10 @@ public class CompteDAO implements IDAO<Integer, Integer,Compte> {
     public Compte findByCode(Integer integer) throws SQLException, IOException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public void update(Compte object) throws SQLException, IOException, ClassNotFoundException {
+
+    }
+
 }

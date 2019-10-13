@@ -74,5 +74,12 @@ public class AgenceDAO implements IDAO<Integer, Integer, Agence> {
         return null;
     }
 
+    @Override
+    public void update(Agence object) throws SQLException, IOException, ClassNotFoundException {
+
+    }
+
+
+
 
 }

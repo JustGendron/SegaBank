@@ -11,6 +11,7 @@ public class EpargneDAO implements IDAO <Integer, Integer, Epargne> {
     private static final String INSERT_QUERY = "INSERT INTO epargne (id,tauxint) VALUES(?,?)";
     private static final String FIND_ALL_EPARGNE = "SELECT * FROM compte,epargne  WHERE compte.id = epargne.id";
     private static final String FIND_QUERY_CODE = "SELECT * FROM compte,epargne  WHERE compte.id = epargne.id and compte.code = ?";
+    private static final String UPDATE_QUERY = "UPDATE compte SET solde = ? WHERE compte.id = ?";
 
     @Override
     public void create(Epargne compteE) throws SQLException, IOException, ClassNotFoundException {
@@ -86,4 +87,20 @@ public class EpargneDAO implements IDAO <Integer, Integer, Epargne> {
         }
         return epargne;
     }
+
+    @Override
+    public void update(Epargne epargne) throws SQLException, IOException, ClassNotFoundException {
+
+        Connection connection = PersistanceManager.getConnection();
+        if ( connection != null ) {
+            try ( PreparedStatement ps = connection.prepareStatement( UPDATE_QUERY ) ) {
+                ps.setFloat( 1, epargne.getSolde() );
+                ps.setInt( 2, epargne.getId() );
+
+                ps.executeUpdate();
+            }
+        }
+    }
+
+
 }

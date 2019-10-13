@@ -12,6 +12,7 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
     private static final String FIND_ALL_SIMPLE = "SELECT * FROM compte,simple  WHERE compte.id = simple.id";
     private static final String FIND_QUERY_ID = "SELECT * FROM compte,simple  WHERE compte.id = simple.id and compte.idagence = ?";
     private static final String FIND_QUERY_CODE = "SELECT * FROM compte,simple  WHERE compte.id = simple.id and compte.code = ?";
+    private static final String UPDATE_QUERY = "UPDATE compte SET solde = ? WHERE compte.id = ?";
 
 
     @Override
@@ -90,6 +91,7 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         simple = new Simple();
+                        simple.setId( rs.getInt( "id" ) );
                         simple.setSolde( rs.getFloat( "solde" ) );
                         simple.setDecouvert( rs.getInt( "decouvert" ) );
                         simple.setIdagence( rs.getInt( "idagence" ) );
@@ -99,6 +101,19 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
             }
         }
         return simple;
+    }
+
+    @Override
+    public void update(Simple simple) throws SQLException, IOException, ClassNotFoundException {
+        Connection connection = PersistanceManager.getConnection();
+        if ( connection != null ) {
+            try ( PreparedStatement ps = connection.prepareStatement( UPDATE_QUERY ) ) {
+                ps.setFloat( 1, simple.getSolde() );
+                ps.setInt( 2, simple.getId() );
+
+                ps.executeUpdate();
+            }
+        }
     }
 
     @Override

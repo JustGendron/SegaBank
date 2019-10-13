@@ -3,6 +3,7 @@ package jdbc.bo;
 public class Epargne extends Compte {
 
     private float tauxInteret;
+    private int id;
 
     public Epargne() {
     }
@@ -16,6 +17,11 @@ public class Epargne extends Compte {
         this.tauxInteret = tauxInteret;
     }
 
+    public Epargne(float solde, int idagence, float tauxInteret) {
+        super(solde, idagence);
+        this.tauxInteret = tauxInteret;
+    }
+
     public float getTauxInteret() {
         return tauxInteret;
     }
@@ -26,5 +32,30 @@ public class Epargne extends Compte {
 
 public float calculInteret(float taux){
      return taux;
-}}
+}
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public float retrait(float montant) {
+        this.setSolde(this.getSolde()- montant);
+        return (this.getSolde());
+
+    }
+
+    @Override
+    public float versement(float montant) {
+
+        this.setSolde(this.getSolde()+ montant);
+        return (this.getSolde());
+    }
+}
 

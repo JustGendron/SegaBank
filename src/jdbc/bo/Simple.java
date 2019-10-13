@@ -36,6 +36,11 @@ public class Simple extends Compte {
         return id;
     }
 
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setDecouvert(float decouvert) {
         this.decouvert = decouvert;
     }
@@ -59,15 +64,15 @@ public class Simple extends Compte {
     @Override
     public float versement(float montant) {
 
-        this.setSolde(this.getSolde()+montant);
-        return super.versement(this.getSolde());
+        this.setSolde(this.getSolde()+ montant);
+        return (this.getSolde());
     }
 
     @Override
     public String toString() {
         return super.toString()+
-                "decouvert=" + decouvert + '}'+
-                id+"";
+                "decouvert=" + decouvert + ", id="+
+                id+"}";
     }
 }
 

@@ -18,6 +18,8 @@ public interface IDAO<ID, CODE, E> {
 
         E findByCode( CODE code ) throws SQLException, IOException, ClassNotFoundException;
 
+        void update (E object) throws SQLException, IOException, ClassNotFoundException;
+
 
 
 
