@@ -235,7 +235,10 @@ public class Main {
                 System.out.println("Montant virement : ");
                 String virementS = sc.nextLine();
                 simple.versement(Float.parseFloat(virementS));
+                System.out.println(simple);
                 System.out.println("Virement de "+virementS+" effectué !");
+                daoS.update(simple);
+
                 break;
 
             case 2:
