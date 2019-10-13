@@ -30,8 +30,8 @@ public class Epargne extends Compte {
         this.tauxInteret = tauxInteret;
     }
 
-public float calculInteret(float taux){
-     return taux;
+    public float calculInteret(float taux){
+        return this.getSolde() * taux;
 }
 
     @Override
@@ -57,5 +57,7 @@ public float calculInteret(float taux){
         this.setSolde(this.getSolde()+ montant);
         return (this.getSolde());
     }
+
+
 }
 
