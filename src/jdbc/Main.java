@@ -57,7 +57,8 @@ public class Main {
             System.out.println("4 - Ajouter une nouvelle agence");
             System.out.println("5 - Ajouter un nouveau compte ");
             System.out.println("6 - Faire une operation sur un compte ");
-            System.out.println("7 - Quitter");
+            System.out.println("7 - Calculer son taux d'interet ");
+            System.out.println("8 - Quitter");
             System.out.print("Entrez votre choix : " );
 
             try {
@@ -97,9 +98,18 @@ public class Main {
                 System.out.println("==Operation sur un compte==");
                 operationCompte();
                 break;
+
+            case 7:
+                System.out.println("==Calcul taux interet==");
+                calculTauxInteret();
+                break;
                 
         }
 
+    }
+
+    private static void calculTauxInteret() {
+        
     }
 
     private static void operationCompte() throws SQLException, IOException, ClassNotFoundException {
@@ -182,6 +192,7 @@ public class Main {
                 String retraitS = sc.nextLine();
                 simple.retrait(Float.parseFloat(retraitS));
                 System.out.println("Retrait de "+retraitS+" effectué !");
+                daoS.update(simple);
                 break;
 
             case 2:
@@ -193,6 +204,7 @@ public class Main {
                 String retraitP = sc.nextLine();
                 payant.retrait(Float.parseFloat(retraitP));
                 System.out.println("Retrait de "+retraitP+" effectué !");
+                daoP.update(payant);
                 break;
 
             case 3:
@@ -204,7 +216,7 @@ public class Main {
                 String retraitE = sc.nextLine();
                 epargne.retrait(Float.parseFloat(retraitE));
                 System.out.println("Retrait de "+retraitE+" effectué !");
-
+                daoE.update(epargne);
                 break;
         }
 
@@ -247,6 +259,7 @@ public class Main {
                 String versementS = sc.nextLine();
                 simple.versement(Float.parseFloat(versementS));
                 System.out.println("Versement de "+versementS+" effectué !");
+                daoS.update(simple);
                 break;
 
             case 2:
@@ -258,6 +271,7 @@ public class Main {
                 String versementP = sc.nextLine();
                 payant.versement(Float.parseFloat(versementP));
                 System.out.println("Versement de "+versementP+" effectué !");
+                daoP.update(payant);
                 break;
 
             case 3:
@@ -269,6 +283,7 @@ public class Main {
                 String versementE = sc.nextLine();
                 epargne.versement(Float.parseFloat(versementE));
                 System.out.println("Versement de "+versementE+" effectué !");
+                daoE.update(epargne);
                 break;
         }
     }
