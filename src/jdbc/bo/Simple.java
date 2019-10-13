@@ -19,6 +19,14 @@ public class Simple extends Compte {
         this.id = id;
     }
 
+    public Simple(int id, float solde, int idagence, float decouvert) {
+        super(solde, idagence);
+        this.id = id;
+        this.decouvert = decouvert;
+    }
+
+
+
     public float getDecouvert() {
         return decouvert;
     }
@@ -46,6 +54,13 @@ public class Simple extends Compte {
         }
         return resp;
 
+    }
+
+    @Override
+    public float versement(float montant) {
+
+        this.setSolde(this.getSolde()+montant);
+        return super.versement(this.getSolde());
     }
 
     @Override
