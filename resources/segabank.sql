@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  ven. 11 oct. 2019 à 08:12
+-- Généré le :  Dim 13 oct. 2019 à 20:22
 -- Version du serveur :  10.4.6-MariaDB
 -- Version de PHP :  7.3.9
 
@@ -34,13 +34,6 @@ CREATE TABLE `agence` (
   `adresse` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `agence`
---
-
-INSERT INTO `agence` (`id`, `code`, `adresse`) VALUES
-(1, 2, 'rue');
-
 -- --------------------------------------------------------
 
 --
@@ -54,12 +47,16 @@ CREATE TABLE `compte` (
   `code` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Déchargement des données de la table `compte`
+-- Structure de la table `epargne`
 --
 
-INSERT INTO `compte` (`id`, `solde`, `idagence`, `code`) VALUES
-(22, 200, 1, 67);
+CREATE TABLE `epargne` (
+  `id` int(11) NOT NULL,
+  `tauxint` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -83,13 +80,6 @@ CREATE TABLE `simple` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `simple`
---
-
-INSERT INTO `simple` (`id`, `decouvert`) VALUES
-(22, 50);
-
---
 -- Index pour les tables déchargées
 --
 
@@ -108,16 +98,22 @@ ALTER TABLE `compte`
   ADD KEY `FK_agence` (`idagence`);
 
 --
+-- Index pour la table `epargne`
+--
+ALTER TABLE `epargne`
+  ADD KEY `FK_epargne` (`id`);
+
+--
 -- Index pour la table `payant`
 --
 ALTER TABLE `payant`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `FK_payant` (`id`);
 
 --
 -- Index pour la table `simple`
 --
 ALTER TABLE `simple`
-  ADD KEY `FK_s` (`id`);
+  ADD KEY `FK_simple` (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -133,7 +129,7 @@ ALTER TABLE `agence`
 -- AUTO_INCREMENT pour la table `compte`
 --
 ALTER TABLE `compte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Contraintes pour les tables déchargées
@@ -143,20 +139,25 @@ ALTER TABLE `compte`
 -- Contraintes pour la table `compte`
 --
 ALTER TABLE `compte`
-  ADD CONSTRAINT `FK_agence` FOREIGN KEY (`idagence`) REFERENCES `agence` (`id`),
-  ADD CONSTRAINT `FK_idagence` FOREIGN KEY (`idagence`) REFERENCES `agence` (`id`);
+  ADD CONSTRAINT `FK_agence` FOREIGN KEY (`idagence`) REFERENCES `agence` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `epargne`
+--
+ALTER TABLE `epargne`
+  ADD CONSTRAINT `FK_epargne` FOREIGN KEY (`id`) REFERENCES `compte` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `payant`
 --
 ALTER TABLE `payant`
-  ADD CONSTRAINT `payant_ibfk_1` FOREIGN KEY (`id`) REFERENCES `compte` (`id`);
+  ADD CONSTRAINT `FK_payant` FOREIGN KEY (`id`) REFERENCES `compte` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `simple`
 --
 ALTER TABLE `simple`
-  ADD CONSTRAINT `FK_s` FOREIGN KEY (`id`) REFERENCES `compte` (`id`);
+  ADD CONSTRAINT `FK_simple` FOREIGN KEY (`id`) REFERENCES `compte` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
