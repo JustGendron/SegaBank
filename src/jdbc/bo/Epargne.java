@@ -13,7 +13,7 @@ public class Epargne extends Compte {
     }
 
     public Epargne(int id, float tauxInteret) {
-        super(id);
+        this.id = id;
         this.tauxInteret = tauxInteret;
     }
 
@@ -30,8 +30,8 @@ public class Epargne extends Compte {
         this.tauxInteret = tauxInteret;
     }
 
-    public float calculInteret(float taux){
-        return this.getSolde() * taux;
+    public float calculInteret(){
+        return (this.getSolde() * this.getTauxInteret());
 }
 
     @Override

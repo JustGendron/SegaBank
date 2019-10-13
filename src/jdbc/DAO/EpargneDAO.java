@@ -78,6 +78,7 @@ public class EpargneDAO implements IDAO <Integer, Integer, Epargne> {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         epargne = new Epargne();
+                        epargne.setTauxInteret(rs.getFloat("tauxint"));
                         epargne.setSolde(rs.getFloat("solde"));
                         epargne.setIdagence(rs.getInt("idagence"));
 
