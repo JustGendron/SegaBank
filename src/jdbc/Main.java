@@ -185,8 +185,6 @@ public class Main {
                 System.out.println( "Compte Epargne créé avec succès!" );
                 System.out.println( " " );
 
-                // Reste à faire le compte epargne
-
 
                 break;
 
@@ -232,21 +230,19 @@ public class Main {
     private static void listerComptes() throws SQLException, IOException, ClassNotFoundException {
 
         for (int i = 0; i < (daoS.findAll()).size(); i++){
-            System.out.print(i+1 + " - Compte : ");
-            System.out.print(daoS.findAll().get(i).getCode());
-            System.out.print(" - ");
+            System.out.println(" == Compte " + daoS.findAll().get(i).getCode() + " ==" );
+            System.out.print("- Solde : ");
             System.out.println(daoS.findAll().get(i).getSolde());
-            System.out.print(" - ");
+            System.out.print("- Decouvert : ");
             System.out.println(daoS.findAll().get(i).getDecouvert());
-            System.out.print(" - ");
+            System.out.print("- Agence : ");
             System.out.println(daoS.findAll().get(i).getIdagence());
         }
         for (int i = 0; i < (daoP.findAll()).size(); i++){
-            System.out.print(i+1 + " - Compte : ");
-            System.out.print(daoP.findAll().get(i).getCode());
-            System.out.print(" - ");
+            System.out.println(" == Compte " + daoS.findAll().get(i).getCode() + " ==" );
+            System.out.print("- Solde : ");
             System.out.println(daoP.findAll().get(i).getSolde());
-            System.out.print(" - ");
+            System.out.print("- Agence : ");
             System.out.println(daoP.findAll().get(i).getIdagence());
         }
 
