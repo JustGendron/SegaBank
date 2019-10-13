@@ -24,12 +24,7 @@ public class Main {
 
         System.out.println(daoS.findByCode(67));
 
-
-
-
-
-
-            bankMainMenu(); // lancement menu
+        bankMainMenu(); // lancement menu
 
         /*IDAO<Agence> dao = new AgenceDAO();
         Agence agence = new Agence(2, "rue");
@@ -107,8 +102,154 @@ public class Main {
 
     }
 
-    private static void operationCompte() {
+    private static void operationCompte() throws SQLException, IOException, ClassNotFoundException {
 
+        int response = 0;
+        boolean first = true;
+
+
+        first = false;
+        do {
+            if (!first) {
+                System.out.println("Mauvais choix !");
+            }
+            System.out.println("======================================");
+            System.out.println("======== OPERATION SUR COMPTE ========");
+            System.out.println("======================================");
+            System.out.println("1- Versement");
+            System.out.println("2- Retrait");
+            System.out.println("3- Quitter");
+            System.out.println("Votre choix : ");
+
+            try {
+                response = sc.nextInt();
+            } catch (InputMismatchException e) {
+                response = -1;
+            } finally {
+                sc.nextLine();
+            }
+
+        } while (response < 1 || response > 9);
+
+        switch(response) {
+            case 1:
+                System.out.println("== Versement ==");
+                operationVersementCompte();
+                break;
+
+            case 2:
+                System.out.println("== Retrait ==");
+                operationRetraitCompte();
+                break;
+        }
+
+    }
+
+    private static void operationRetraitCompte() throws SQLException, IOException, ClassNotFoundException {
+
+        int response = 0;
+        boolean first = true;
+        do {
+            if (!first) {
+                System.out.println("Mauvais choix !");
+            }
+            System.out.println("======================================");
+            System.out.println("======== RETRAIT SUR COMPTE ========");
+            System.out.println("======================================");
+            System.out.println("1- Compte Simple");
+            System.out.println("2- Compte Payant");
+            System.out.println("3- Compte Epargne");
+            System.out.println("4- Quitter");
+            System.out.println("Votre choix : ");
+
+            try {
+                response = sc.nextInt();
+            } catch (InputMismatchException e) {
+                response = -1;
+            } finally {
+                sc.nextLine();
+            }
+
+        } while (response < 1 || response > 9);
+
+        switch(response) {
+            case 1:
+                System.out.println("== Compte Simple ==");
+                System.out.println("Code du compte : ");
+                String codeS = sc.nextLine();
+                Simple simple = daoS.findByCode(Integer.parseInt(codeS));
+                System.out.println("Montant retrait : ");
+                String retraitS = sc.nextLine();
+                simple.retrait(Float.parseFloat(retraitS));
+                System.out.println("Virement de "+retraitS+" effectué !");
+                break;
+
+            case 2:
+                System.out.println("== Compte Payant ==");
+                System.out.println("Code du compte : ");
+
+                break;
+
+            case 3:
+                System.out.println("== Compte Epargne ==");
+                System.out.println("Code du compte : ");
+
+                break;
+        }
+
+    }
+
+    private static void operationVersementCompte() throws SQLException, IOException, ClassNotFoundException {
+
+        int response = 0;
+        boolean first = true;
+        do {
+            if (!first) {
+                System.out.println("Mauvais choix !");
+            }
+            System.out.println("======================================");
+            System.out.println("======== VERSEMENT SUR COMPTE ========");
+            System.out.println("======================================");
+            System.out.println("1- Compte Simple");
+            System.out.println("2- Compte Payant");
+            System.out.println("3- Compte Epargne");
+            System.out.println("4- Quitter");
+            System.out.println("Votre choix : ");
+
+            try {
+                response = sc.nextInt();
+            } catch (InputMismatchException e) {
+                response = -1;
+            } finally {
+                sc.nextLine();
+            }
+
+        } while (response < 1 || response > 9);
+
+        switch(response) {
+            case 1:
+                System.out.println("== Compte Simple ==");
+                System.out.println("Code du compte : ");
+                String codeS = sc.nextLine();
+                Simple simple = daoS.findByCode(Integer.parseInt(codeS));
+                System.out.println("Montant virement : ");
+                String virementS = sc.nextLine();
+                simple.versement(Float.parseFloat(virementS));
+                System.out.println("Virement de "+virementS+" effectué !");
+                break;
+
+            case 2:
+                System.out.println("== Compte Payant ==");
+                System.out.println("Code du compte : ");
+
+                break;
+
+            case 3:
+                System.out.println("== Compte Epargne ==");
+                System.out.println("Code du compte : ");
+
+                break;
+        }
     }
 
     private static void listerComptesParAgences() throws SQLException, IOException, ClassNotFoundException {
@@ -301,6 +442,8 @@ public class Main {
             System.out.println(" == Compte " + daoE.findAll().get(i).getCode() + " (Epargne) ==" );
             System.out.print("- Solde : ");
             System.out.println(daoE.findAll().get(i).getSolde());
+            System.out.print("- Taux : ");
+            System.out.println(daoE.findAll().get(i).getTauxInteret());
             System.out.print("- Agence : ");
             System.out.println(daoE.findAll().get(i).getIdagence());
         }
