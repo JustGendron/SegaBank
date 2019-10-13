@@ -20,24 +20,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
 
-
-        //System.out.println(daoC.findByCode(1));
-        daoC.remove(daoC.findByCode(1));
-
-
         bankMainMenu(); // lancement menu
-
-        /*IDAO<Agence> dao = new AgenceDAO();
-        Agence agence = new Agence(2, "rue");
-        System.out.println( agence );
-
-        try {
-           dao.create( agence );
-            System.out.println( agence );
-        } catch ( IOException | ClassNotFoundException | SQLException e ) {
-            System.err.println( e.getMessage() );
-        }*/
-
     }
 
     public static void bankMainMenu() throws SQLException, IOException, ClassNotFoundException {
