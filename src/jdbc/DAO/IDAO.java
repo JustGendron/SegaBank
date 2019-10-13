@@ -20,6 +20,8 @@ public interface IDAO<ID, CODE, E> {
 
         void update (E object) throws SQLException, IOException, ClassNotFoundException;
 
+        void remove( E object ) throws SQLException, IOException, ClassNotFoundException;
+
 
 
 

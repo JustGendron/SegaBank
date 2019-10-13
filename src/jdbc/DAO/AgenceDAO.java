@@ -79,7 +79,10 @@ public class AgenceDAO implements IDAO<Integer, Integer, Agence> {
 
     }
 
+    @Override
+    public void remove(Agence object) throws SQLException, IOException, ClassNotFoundException {
 
+    }
 
 
 }

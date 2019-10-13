@@ -102,5 +102,10 @@ public class EpargneDAO implements IDAO <Integer, Integer, Epargne> {
         }
     }
 
+    @Override
+    public void remove(Epargne object) throws SQLException, IOException, ClassNotFoundException {
+
+    }
+
 
 }

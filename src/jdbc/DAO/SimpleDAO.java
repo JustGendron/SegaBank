@@ -117,6 +117,11 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
     }
 
     @Override
+    public void remove(Simple object) throws SQLException, IOException, ClassNotFoundException {
+
+    }
+
+    @Override
     public Simple findById(Integer id) throws SQLException, IOException, ClassNotFoundException {
         Simple simple = null;
         Connection connection = PersistanceManager.getConnection();

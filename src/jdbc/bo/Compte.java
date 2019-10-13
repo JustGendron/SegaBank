@@ -21,6 +21,15 @@ public class Compte {
         this.idagence = idagence;
     }
 
+    public Compte(int code, int id, float solde, int idagence) {
+        this.code = code;
+        this.id = id;
+        this.solde = solde;
+        this.idagence = idagence;
+    }
+
+
+
     public int getId() {
         return id;
     }

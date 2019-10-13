@@ -100,4 +100,9 @@ public class PayantDAO implements IDAO<Integer, Integer, Payant>{
         }
     }
 
+    @Override
+    public void remove(Payant object) throws SQLException, IOException, ClassNotFoundException {
+
+    }
+
 }

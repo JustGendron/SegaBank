@@ -18,6 +18,8 @@ public class CompteDAO implements IDAO<Integer, Integer,Compte> {
     private static final String FIND_ALLSIMPLE_QUERY = "SELECT * FROM compte,simple where compte.id = simple.id";
     private static final String FIND_ALLPAYANT_QUERY = "SELECT * FROM compte,payant where compte.id = payant.id";
     private static final String FIND_ALLEpargne_QUERY = "SELECT * FROM compte,simple where compte.id = simple.id";
+    private static final String REMOVE_QUERY = "DELETE FROM compte WHERE id = ?";
+    private static final String FIND_QUERY_CODE = "SELECT * FROM compte WHERE compte.code = ?";
 
 
 
@@ -124,13 +126,41 @@ public class CompteDAO implements IDAO<Integer, Integer,Compte> {
     }
 
     @Override
-    public Compte findByCode(Integer integer) throws SQLException, IOException, ClassNotFoundException {
-        return null;
+    public Compte findByCode(Integer code) throws SQLException, IOException, ClassNotFoundException {
+        Compte compte = null;
+        Connection connection = PersistanceManager.getConnection();
+        if (connection != null) {
+            try (PreparedStatement ps = connection.prepareStatement(FIND_QUERY_CODE)) {
+                ps.setLong(1, code);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        compte = new Compte();
+                        compte.setCode( rs.getInt( "code" ));
+                        compte.setId( rs.getInt( "id" ) );
+                        compte.setSolde( rs.getFloat( "solde" ) );
+                        compte.setIdagence( rs.getInt( "idagence" ) );
+
+                    }
+                }
+            }
+        }
+        return compte;
     }
 
     @Override
     public void update(Compte object) throws SQLException, IOException, ClassNotFoundException {
 
+    }
+
+    @Override
+    public void remove(Compte compte) throws SQLException, IOException, ClassNotFoundException {
+        Connection connection = PersistanceManager.getConnection();
+        if ( connection != null ) {
+            try ( PreparedStatement ps = connection.prepareStatement( REMOVE_QUERY ) ) {
+                ps.setInt( 1, compte.getId() );
+                ps.executeUpdate();
+            }
+        }
     }
 
 }
