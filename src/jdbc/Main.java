@@ -181,18 +181,29 @@ public class Main {
                 System.out.println("Montant retrait : ");
                 String retraitS = sc.nextLine();
                 simple.retrait(Float.parseFloat(retraitS));
-                System.out.println("Virement de "+retraitS+" effectué !");
+                System.out.println("Retrait de "+retraitS+" effectué !");
                 break;
 
             case 2:
                 System.out.println("== Compte Payant ==");
                 System.out.println("Code du compte : ");
-
+                String codeP = sc.nextLine();
+                Payant payant = daoP.findByCode(Integer.parseInt(codeP));
+                System.out.println("Montant retrait : ");
+                String retraitP = sc.nextLine();
+                payant.retrait(Float.parseFloat(retraitP));
+                System.out.println("Retrait de "+retraitP+" effectué !");
                 break;
 
             case 3:
                 System.out.println("== Compte Epargne ==");
                 System.out.println("Code du compte : ");
+                String codeE = sc.nextLine();
+                Epargne epargne = daoE.findByCode(Integer.parseInt(codeE));
+                System.out.println("Montant retrait : ");
+                String retraitE = sc.nextLine();
+                epargne.retrait(Float.parseFloat(retraitE));
+                System.out.println("Retrait de "+retraitE+" effectué !");
 
                 break;
         }
@@ -232,25 +243,32 @@ public class Main {
                 System.out.println("Code du compte : ");
                 String codeS = sc.nextLine();
                 Simple simple = daoS.findByCode(Integer.parseInt(codeS));
-                System.out.println("Montant virement : ");
-                String virementS = sc.nextLine();
-                simple.versement(Float.parseFloat(virementS));
-                System.out.println(simple);
-                System.out.println("Virement de "+virementS+" effectué !");
-                daoS.update(simple);
-
+                System.out.println("Montant versement : ");
+                String versementS = sc.nextLine();
+                simple.versement(Float.parseFloat(versementS));
+                System.out.println("Versement de "+versementS+" effectué !");
                 break;
 
             case 2:
                 System.out.println("== Compte Payant ==");
                 System.out.println("Code du compte : ");
-
+                String codeP = sc.nextLine();
+                Payant payant = daoP.findByCode(Integer.parseInt(codeP));
+                System.out.println("Montant versement : ");
+                String versementP = sc.nextLine();
+                payant.versement(Float.parseFloat(versementP));
+                System.out.println("Versement de "+versementP+" effectué !");
                 break;
 
             case 3:
                 System.out.println("== Compte Epargne ==");
                 System.out.println("Code du compte : ");
-
+                String codeE = sc.nextLine();
+                Epargne epargne = daoE.findByCode(Integer.parseInt(codeE));
+                System.out.println("Montant versement :");
+                String versementE = sc.nextLine();
+                epargne.versement(Float.parseFloat(versementE));
+                System.out.println("Versement de "+versementE+" effectué !");
                 break;
         }
     }
