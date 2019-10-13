@@ -108,8 +108,15 @@ public class Main {
 
     }
 
-    private static void calculTauxInteret() {
-        
+    private static void calculTauxInteret() throws SQLException, IOException, ClassNotFoundException {
+        System.out.println("======================================");
+        System.out.println("======== CALCUL TAUX INTERET =========");
+        System.out.println("======================================");
+        System.out.println("Code du compte : ");
+        String codeCompte = sc.nextLine();
+        Epargne epargne = daoE.findByCode(Integer.parseInt(codeCompte));
+        epargne.calculInteret(epargne.getTauxInteret());
+        System.out.println("Vous avez gagné " + epargne.getTauxInteret() + " ce qui vous fait un solde de " + epargne.calculInteret(epargne.getTauxInteret()));
     }
 
     private static void operationCompte() throws SQLException, IOException, ClassNotFoundException {
