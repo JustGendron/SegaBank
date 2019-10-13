@@ -75,7 +75,8 @@ public class Main {
             System.out.println("3 - Lister tout les comptes par agences");
             System.out.println("4 - Ajouter une nouvelle agence");
             System.out.println("5 - Ajouter un nouveau compte ");
-            System.out.println("6 - Quitter");
+            System.out.println("6 - Faire une operation sur un compte ");
+            System.out.println("7 - Quitter");
             System.out.print("Entrez votre choix : " );
 
             try {
@@ -110,8 +111,17 @@ public class Main {
                 System.out.println("==Creation d'un nouveau compte==");
                 ajouterCompte();
                 break;
+
+            case 6:
+                System.out.println("==Operation sur un compte==");
+                operationCompte();
+                break;
                 
         }
+
+    }
+
+    private static void operationCompte() {
 
     }
 
@@ -208,8 +218,6 @@ public class Main {
                 System.out.println( "Compte Epargne créé avec succès!" );
                 System.out.println( " " );
 
-                // Reste à faire le compte epargne
-
 
                 break;
 
@@ -255,23 +263,29 @@ public class Main {
     private static void listerComptes() throws SQLException, IOException, ClassNotFoundException {
 
         for (int i = 0; i < (daoS.findAll()).size(); i++){
-            System.out.print(i+1 + " - Compte : ");
-            System.out.print(daoS.findAll().get(i).getCode());
-            System.out.print(" - ");
+            System.out.println(" == Compte " + daoS.findAll().get(i).getCode() + " (Simple) ==" );
+            System.out.print("- Solde : ");
             System.out.println(daoS.findAll().get(i).getSolde());
-            System.out.print(" - ");
+            System.out.print("- Decouvert : ");
             System.out.println(daoS.findAll().get(i).getDecouvert());
-            System.out.print(" - ");
+            System.out.print("- Agence : ");
             System.out.println(daoS.findAll().get(i).getIdagence());
         }
         for (int i = 0; i < (daoP.findAll()).size(); i++){
-            System.out.print(i+1 + " - Compte : ");
-            System.out.print(daoP.findAll().get(i).getCode());
-            System.out.print(" - ");
+            System.out.println(" == Compte " + daoP.findAll().get(i).getCode() + " (Payant) ==" );
+            System.out.print("- Solde : ");
             System.out.println(daoP.findAll().get(i).getSolde());
-            System.out.print(" - ");
+            System.out.print("- Agence : ");
             System.out.println(daoP.findAll().get(i).getIdagence());
         }
+        for (int i = 0; i < (daoE.findAll()).size(); i++){
+            System.out.println(" == Compte " + daoE.findAll().get(i).getCode() + " (Epargne) ==" );
+            System.out.print("- Solde : ");
+            System.out.println(daoE.findAll().get(i).getSolde());
+            System.out.print("- Agence : ");
+            System.out.println(daoE.findAll().get(i).getIdagence());
+        }
+
 
 
         bankMainMenu();
