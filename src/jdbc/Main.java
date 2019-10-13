@@ -21,22 +21,8 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
 
 
-        Simple simple = new Simple(50,2,0);
-        Payant payant = new Payant(100,1);
 
-        simple.versement(20);
-        System.out.println(simple.getSolde());
-        simple.retrait(20);
-        System.out.println(simple.getSolde());
-        simple.retrait(50);
-        System.out.println(simple.getSolde());
-        simple.retrait(20);
-        System.out.println(simple.getSolde());
-
-        payant.versement(100);
-        System.out.println(payant.getSolde());
-        payant.retrait(100);
-        System.out.println(payant.getSolde());
+        System.out.println(daoS.findByCode(67));
 
 
 
@@ -125,9 +111,42 @@ public class Main {
 
     }
 
-    private static void listerComptesParAgences() {
+    private static void listerComptesParAgences() throws SQLException, IOException, ClassNotFoundException {
+
+        System.out.print("Entrez l'id de l'agence : ");
+        String id = sc.nextLine();
+        int idagence= Integer.parseInt(id);
+
+        for (int i = 0; i < (daoS.findByIdList(idagence)).size(); i++){
+            System.out.println(" == Compte " + daoS.findByIdList(idagence).get(i).getCode() + " (Simple) ==" );
+            System.out.print("- Solde : ");
+            System.out.println(daoS.findByIdList(idagence).get(i).getSolde());
+            System.out.print("- Decouvert : ");
+            System.out.println(daoS.findByIdList(idagence).get(i).getDecouvert());
+            System.out.print("- Agence : ");
+            System.out.println(daoS.findByIdList(idagence).get(i).getIdagence());
+        }/*
+        for (int i = 0; i < (daoP.findByIdList(idagence)).size(); i++){
+            System.out.println(" == Compte " + daoP.findByIdList(idagence).get(i).getCode() + " (Payant) ==" );
+            System.out.print("- Solde : ");
+            System.out.println(daoP.findByIdList(idagence).get(i).getSolde());
+            System.out.print("- Agence : ");
+            System.out.println(daoP.findByIdList(idagence).get(i).getIdagence());
+        }
+        for (int i = 0; i < (daoE.findByIdList(idagence)).size(); i++){
+            System.out.println(" == Compte " + daoE.findByIdList(idagence).get(i).getCode() + " (Epargne) ==" );
+            System.out.print("- Solde : ");
+            System.out.println(daoE.findByIdList(idagence).get(i).getSolde());
+            System.out.print("- Agence : ");
+            System.out.println(daoE.findByIdList(idagence).get(i).getIdagence());
+        }*/
+
+
+
+        bankMainMenu();
 
     }
+
 
     private static void ajouterCompte() throws SQLException, IOException, ClassNotFoundException {
 

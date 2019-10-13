@@ -11,6 +11,7 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
     private static final String INSERT_QUERY = "INSERT INTO simple (id,decouvert) VALUES(?,?)";
     private static final String FIND_ALL_SIMPLE = "SELECT * FROM compte,simple  WHERE compte.id = simple.id";
     private static final String FIND_QUERY_ID = "SELECT * FROM compte,simple  WHERE compte.id = simple.id and compte.idagence = ?";
+    private static final String FIND_QUERY_CODE = "SELECT * FROM compte,simple  WHERE compte.id = simple.id and compte.code = ?";
 
 
     @Override
@@ -32,10 +33,6 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
         return null;
     }
 
- /*   @Override
-    public Simple findidbycode(Integer aLong) throws SQLException, IOException, ClassNotFoundException {
-        return null;
-    }*/
 
     @Override
     public List<Simple> findAll() throws SQLException, IOException, ClassNotFoundException {
@@ -81,6 +78,27 @@ public class SimpleDAO  implements IDAO<Integer, Integer, Simple> {
             }
         }
         return list;
+    }
+
+    @Override
+    public Simple findByCode(Integer code) throws SQLException, IOException, ClassNotFoundException {
+        Simple simple = null;
+        Connection connection = PersistanceManager.getConnection();
+        if (connection != null) {
+            try (PreparedStatement ps = connection.prepareStatement(FIND_QUERY_CODE)) {
+                ps.setLong(1, code);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        simple = new Simple();
+                        simple.setSolde( rs.getFloat( "solde" ) );
+                        simple.setDecouvert( rs.getInt( "decouvert" ) );
+                        simple.setIdagence( rs.getInt( "idagence" ) );
+
+                    }
+                }
+            }
+        }
+        return simple;
     }
 
     @Override

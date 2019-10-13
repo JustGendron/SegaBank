@@ -16,6 +16,8 @@ public interface IDAO<ID, CODE, E> {
 
         List<E> findByIdList( ID id ) throws SQLException, IOException, ClassNotFoundException;
 
+        E findByCode( CODE code ) throws SQLException, IOException, ClassNotFoundException;
+
 
 
 

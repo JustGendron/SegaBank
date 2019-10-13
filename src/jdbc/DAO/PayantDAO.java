@@ -64,4 +64,9 @@ public class PayantDAO implements IDAO<Integer, Integer, Payant>{
     public List<Payant> findByIdList(Integer integer) throws SQLException, IOException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public Payant findByCode(Integer integer) throws SQLException, IOException, ClassNotFoundException {
+        return null;
+    }
 }

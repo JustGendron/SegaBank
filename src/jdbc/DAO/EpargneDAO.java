@@ -65,4 +65,9 @@ public class EpargneDAO implements IDAO <Integer, Integer, Epargne> {
     public List<Epargne> findByIdList(Integer integer) throws SQLException, IOException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public Epargne findByCode(Integer integer) throws SQLException, IOException, ClassNotFoundException {
+        return null;
+    }
 }
