@@ -2,6 +2,9 @@ package jdbc.DAO;
 
 import jdbc.bo.Agence;
 
+
+import jdbc.bo.Agence;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;

@@ -14,7 +14,8 @@ public class CompteDAO implements IDAO<Integer, Integer,Compte> {
     private static final String FIND_QUERY = "SELECT * FROM compte  WHERE code = ?";
     private static final String FIND_QUERY_ID = "SELECT * FROM compte WHERE id = ?";
     private static final String FIND_ALL_QUERY = "SELECT * FROM compte,simple,payant where idagence = ?";
-    private static final String FIND_ALL = "SELECT * FROM compte";
+
+
 
     @Override
     public void create( Compte compte ) throws SQLException, IOException, ClassNotFoundException {
@@ -32,7 +33,7 @@ public class CompteDAO implements IDAO<Integer, Integer,Compte> {
         }
     }
 
-   @Override
+    @Override
     public Compte findidbycode(Integer code ) throws SQLException, IOException, ClassNotFoundException {
         Compte compte = null;
         Connection connection = PersistanceManager.getConnection();
@@ -53,22 +54,7 @@ public class CompteDAO implements IDAO<Integer, Integer,Compte> {
 
     @Override
     public List<Compte> findAll() throws SQLException, IOException, ClassNotFoundException {
-        List<Compte> list = new ArrayList<>();
-        Connection connection = PersistanceManager.getConnection();
-        if ( connection != null ) {
-            try ( PreparedStatement ps = connection.prepareStatement( FIND_ALL ) ) {
-                try ( ResultSet rs = ps.executeQuery() ) {
-                    while ( rs.next() ) {
-                        Compte compte = new Compte();
-                        compte.setId( rs.getInt( "id" ) );
-                        compte.setSolde( rs.getInt( "solde" ) );
-                        compte.setIdagence( rs.getInt( "idagence" ) );
-                        list.add( compte );
-                    }
-                }
-            }
-        }
-        return list;
+        return null;
     }
 
     @Override
