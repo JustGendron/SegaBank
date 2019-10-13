@@ -132,8 +132,8 @@ public class Main {
         System.out.println("Code du compte : ");
         String codeCompte = sc.nextLine();
         Epargne epargne = daoE.findByCode(Integer.parseInt(codeCompte));
-        epargne.calculInteret(epargne.getTauxInteret());
-        System.out.println("Vous avez gagné " + epargne.getTauxInteret() + " ce qui vous fait un solde de " + epargne.calculInteret(epargne.getTauxInteret()));
+
+        System.out.println("Vous avez gagné " + epargne.calculInteret() + " ce qui vous fait un solde de " + epargne.getSolde()+" avec un taux d'interet de "+epargne.getTauxInteret());
     }
 
     private static void operationCompte() throws SQLException, IOException, ClassNotFoundException {
