@@ -59,7 +59,8 @@ public class Main {
             System.out.println("5 - Ajouter un nouveau compte ");
             System.out.println("6 - Faire une operation sur un compte ");
             System.out.println("7 - Calculer son taux d'interet ");
-            System.out.println("8 - Quitter");
+            System.out.println("8 - Supression d'un compte");
+            System.out.println("9 - Quitter");
             System.out.print("Entrez votre choix : " );
 
             try {
@@ -104,9 +105,24 @@ public class Main {
                 System.out.println("==Calcul taux interet==");
                 calculTauxInteret();
                 break;
+
+            case 8:
+                System.out.println("==Supression d'un compte==");
+                suppressionCompte();
+                break;
                 
         }
 
+    }
+
+    private static void suppressionCompte() throws SQLException, IOException, ClassNotFoundException {
+        System.out.println("======================================");
+        System.out.println("======== SUPRESSION DE COMPTE ========");
+        System.out.println("======================================");
+        System.out.println("Code du compte : ");
+        String codeCompte = sc.nextLine();
+        daoC.remove(daoC.findByCode(Integer.parseInt(codeCompte)));
+        System.out.println("Compte " + codeCompte + " supprimé avec succes");
     }
 
     private static void calculTauxInteret() throws SQLException, IOException, ClassNotFoundException {
